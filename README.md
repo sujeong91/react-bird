@@ -9,3 +9,6 @@ react로 redux, axios, next 작업을 연습할 repository
 - next.js로 라우팅(나중에 SSR)
 ### global variable
 - redux
+### styling
+- antd
+- styled-component
