@@ -1,6 +1,7 @@
-import AppLayout from './AppLayout';
-import Nav from './Nav';
+import { AppLayout } from './AppLayout';
+import { Nav } from './Nav';
+import { PostForm } from './PostForm';
 
 export {
-  AppLayout, Nav,
+  AppLayout, Nav, PostForm,
 };

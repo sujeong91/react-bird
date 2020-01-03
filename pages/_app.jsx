@@ -7,15 +7,16 @@ import Head from 'next/head';
 import { AppLayout } from '../components';
 
 const ReactBird = ({ Component }) => (
-  <>
-    <Head>
-      <title>ReactBird</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css" />
-    </Head>
-    <AppLayout>
-      <Component />
-    </AppLayout>
-  </>
+  (
+    <>
+      <Head>
+        <title>ReactBird</title>
+      </Head>
+      <AppLayout>
+        <Component />
+      </AppLayout>
+    </>
+  )
 );
 
 ReactBird.propTypes = {
