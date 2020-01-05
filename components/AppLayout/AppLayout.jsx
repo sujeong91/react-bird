@@ -13,7 +13,7 @@ const LeftCol = styled(Col)`
   padding: 8px 4px 8px 8px;
 `;
 const CenterCol = styled(Col)`
-  padding: 8px 4px;
+  padding: 8px 4px 32px;
 `;
 const RightCol = styled(Col)`
   padding: 8px 8px 8px 4px;
@@ -24,7 +24,7 @@ const dummy = {
 };
 
 const AppLayout = ({ children }) => (
-  <div>
+  <div className="AppLayout">
     <Nav />
     <Row>
       <LeftCol xs={24} md={6}>

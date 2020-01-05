@@ -14,7 +14,7 @@ const SearchButton = styled(Input.Search)`
 `;
 
 const Nav = () => (
-  <div>
+  <div className="Nav">
     <Menu mode="horizontal">
       <Menu.Item key="home"><Link href="/"><a>리액트버드</a></Link></Menu.Item>
       <Menu.Item key="profile"><Link href="/profile"><a>프로필</a></Link></Menu.Item>
