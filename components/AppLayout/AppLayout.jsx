@@ -6,21 +6,21 @@ import styled from 'styled-components';
 
 // screen
 import { Row, Col } from 'antd';
-import { Nav } from '../index';
+import { Nav, UserProfile, LoginForm } from '../index';
 
 // NOTE: Row에 gutter를 하면 브라우저에 가로 스크롤이 생겨 각 col에 padding으로 설정.
 const LeftCol = styled(Col)`
-  padding: 8px 4px 8px 8px;
+  padding: 12px 6px 12px 12px;
 `;
 const CenterCol = styled(Col)`
-  padding: 8px 4px 32px;
+  padding: 12px 6px 32px;
 `;
 const RightCol = styled(Col)`
-  padding: 8px 8px 8px 4px;
+  padding: 12px 12px 12px 6px;
 `;
 
 const dummy = {
-  isLoggedIn: true,
+  isLoggedIn: false,
 };
 
 const AppLayout = ({ children }) => (
@@ -29,8 +29,8 @@ const AppLayout = ({ children }) => (
     <Row>
       <LeftCol xs={24} md={6}>
         {dummy.isLoggedIn
-          ? 'login'
-          : 'logout'}
+          ? <UserProfile />
+          : <LoginForm />}
       </LeftCol>
       <CenterCol xs={24} md={12}>
         {children}
