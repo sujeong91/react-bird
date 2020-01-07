@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 // screen
 import { Row, Col } from 'antd';
@@ -19,30 +20,30 @@ const RightCol = styled(Col)`
   padding: 12px 12px 12px 6px;
 `;
 
-const dummy = {
-  isLoggedIn: false,
-};
+const AppLayout = ({ children }) => {
+  const { user } = useSelector((state) => state.user);
 
-const AppLayout = ({ children }) => (
-  <div className="AppLayout">
-    <Nav />
-    <Row>
-      <LeftCol xs={24} md={6}>
-        {dummy.isLoggedIn
-          ? <UserProfile />
-          : <LoginForm />}
-      </LeftCol>
-      <CenterCol xs={24} md={12}>
-        {children}
-      </CenterCol>
-      <RightCol xs={24} md={6}>
-        <Link href="https://github.com/sujeong91/react-bird" prefetch={false}>
-          <a target="_blank">Made by sujeongKim</a>
-        </Link>
-      </RightCol>
-    </Row>
-  </div>
-);
+  return (
+    <div className="AppLayout">
+      <Nav />
+      <Row>
+        <LeftCol xs={24} md={6}>
+          {user
+            ? <UserProfile />
+            : <LoginForm />}
+        </LeftCol>
+        <CenterCol xs={24} md={12}>
+          {children}
+        </CenterCol>
+        <RightCol xs={24} md={6}>
+          <Link href="https://github.com/sujeong91/react-bird" prefetch={false}>
+            <a target="_blank">Made by sujeongKim</a>
+          </Link>
+        </RightCol>
+      </Row>
+    </div>
+  );
+};
 
 export default AppLayout;
 

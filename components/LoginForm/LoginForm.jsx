@@ -2,12 +2,14 @@
 import React, { useCallback } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 // screen
 import { Button, Form, Input } from 'antd';
 
 // skill
 import { useInput } from '../../utils';
+import { loginAction } from '../../reducers/user';
 
 const Wrapper = styled(Form)`
   .form-wrapper {
@@ -29,11 +31,13 @@ const Wrapper = styled(Form)`
 const LoginForm = () => {
   const [userId, onChangeUserId] = useInput('');
   const [password, onChangePassword] = useInput('');
+  const dispatch = useDispatch();
+
   const onSubmitForm = useCallback((e) => {
     e.preventDefault();
-    // console.log({
-    //   userId, password,
-    // });
+    dispatch(loginAction({
+      userId, password,
+    }));
   }, [userId, password]);
 
   return (

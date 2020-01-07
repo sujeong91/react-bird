@@ -7,5 +7,6 @@ import { LoginForm } from './LoginForm';
 import { UserProfile } from './UserProfile';
 
 export {
-  AppLayout, Nav, PostForm, PostCard, NicknameEditForm, LoginForm, UserProfile,
+  AppLayout, Nav, PostForm, PostCard,
+  NicknameEditForm, LoginForm, UserProfile,
 };
