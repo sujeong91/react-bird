@@ -25,3 +25,5 @@ git clone [url주소] > cd react-bird > npm run dev
 ### styling
 - antd
 - styled-component
+### ajax
+- axios
