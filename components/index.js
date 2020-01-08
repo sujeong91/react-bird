@@ -5,8 +5,10 @@ import { PostCard } from './PostCard';
 import { NicknameEditForm } from './NicknameEditForm';
 import { LoginForm } from './LoginForm';
 import { UserProfile } from './UserProfile';
+import { Loading } from './Loading';
 
 export {
   AppLayout, Nav, PostForm, PostCard,
   NicknameEditForm, LoginForm, UserProfile,
+  Loading,
 };

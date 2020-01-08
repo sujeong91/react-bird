@@ -33,9 +33,17 @@ export const REMOVE_FOLLOWER_FAILURE = 'user/REMOVE_FOLLOWER_FAILURE';
 
 export const ADD_POST_TO_ME = 'user/ADD_POST_TO_ME';
 
-export const loginAction = (data) => ({
+export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
   data,
+});
+export const loginSuccessAction = (data) => ({
+  type: LOG_IN_SUCCESS,
+  data,
+});
+export const loginFailureAction = (error) => ({
+  type: LOG_IN_FAILURE,
+  error,
 });
 
 const dummyUser = {
@@ -46,8 +54,9 @@ const dummyUser = {
 };
 
 const initialState = {
-  user: null,
-  loginData: {},
+  isLoading: false,
+  me: null,
+  loginErrorReason: '',
 };
 
 // reducer
@@ -56,8 +65,19 @@ export default (state = initialState, action) => {
     case LOG_IN_REQUEST:
       return {
         ...state,
-        loginData: action.data,
-        user: dummyUser,
+        isLoading: true,
+      };
+    case LOG_IN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        me: dummyUser,
+      };
+    case LOG_IN_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        loginErrorReason: action.error,
       };
     default:
       return state;

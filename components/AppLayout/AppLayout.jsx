@@ -21,14 +21,14 @@ const RightCol = styled(Col)`
 `;
 
 const AppLayout = ({ children }) => {
-  const { user } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   return (
     <div className="AppLayout">
       <Nav />
       <Row>
         <LeftCol xs={24} md={6}>
-          {user
+          {me
             ? <UserProfile />
             : <LoginForm />}
         </LeftCol>
