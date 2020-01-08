@@ -1,6 +1,8 @@
 // base
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+import Router from 'next/router';
+import { useSelector } from 'react-redux';
 
 // screen
 import {
@@ -44,6 +46,15 @@ const Signup = () => {
   const [userId, onChangeUserId] = useInput('');
   const [nick, onChangeNick] = useInput('');
   const [password, onChangePassword] = useInput('');
+
+  const { me } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (me) {
+      alert('로그인했으니 메인페이지로 이동합니다.');
+      Router.push('/');
+    }
+  }, [me && me.id]);
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
