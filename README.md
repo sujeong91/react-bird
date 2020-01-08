@@ -21,6 +21,7 @@ git clone [url주소] > cd react-bird > npm run dev
 - next.js로 라우팅(나중에 SSR)
 ### global variable
 - redux
+- redux-saga
 ### styling
 - antd
 - styled-component
