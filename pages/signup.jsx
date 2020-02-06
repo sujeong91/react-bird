@@ -2,15 +2,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import Router from 'next/router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // screen
 import {
   Form, Input, Checkbox, Button,
 } from 'antd';
+import { Loading } from '../components';
 
 // skills
 import { useInput } from '../utils';
+import { signUpRequestAction } from '../reducers/user';
 
 const Wrapper = styled(Form)`
   .title {
@@ -38,6 +40,7 @@ const Wrapper = styled(Form)`
 `;
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const [passwordCheck, setPasswordCheck] = useState('');
   const [term, setTerm] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
@@ -47,7 +50,7 @@ const Signup = () => {
   const [nick, onChangeNick] = useInput('');
   const [password, onChangePassword] = useInput('');
 
-  const { me } = useSelector((state) => state.user);
+  const { me, isSigningUp } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (me) {
@@ -64,15 +67,13 @@ const Signup = () => {
     if (!term) {
       return setTermError(true);
     }
-    // console.log({
-    //   userId,
-    //   nick,
-    //   password,
-    //   passwordCheck,
-    //   term,
-    // });
+    dispatch(signUpRequestAction({
+      userId,
+      password,
+      nickname: nick,
+    }));
     return false;
-  }, [password, passwordCheck, term]);
+  }, [userId, nick, password, passwordCheck, term]);
 
   const onChangePasswordCheck = useCallback((e) => {
     setPasswordError(e.target.value !== password);
@@ -86,37 +87,41 @@ const Signup = () => {
 
   return (
     <Wrapper onSubmit={onSubmit}>
-      <p className="title">회원가입</p>
-      <div className="form-wrapper">
-        <label>아이디</label>
-        <Input name="user-id" value={userId} required onChange={onChangeUserId} />
-      </div>
-      <div className="form-wrapper">
-        <label>닉네임</label>
-        <Input name="user-nick" value={nick} required onChange={onChangeNick} />
-      </div>
-      <div className="form-wrapper">
-        <label>비밀번호</label>
-        <Input name="user-password" type="password" value={password} required onChange={onChangePassword} />
-      </div>
-      <div className="form-wrapper">
-        <label>비밀번호체크</label>
-        <Input
-          name="user-password-check"
-          type="password"
-          value={passwordCheck}
-          required
-          onChange={onChangePasswordCheck}
-        />
-        {passwordError && <div className="error">비밀번호가 일치하지 않습니다.</div>}
-      </div>
-      <div className="term">
-        <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>react-bird의 이용약관에 동의합니다.</Checkbox>
-        {termError && <div className="error">약관에 동의하셔야 합니다.</div>}
-      </div>
-      <div className="button-wrapper">
-        <Button type="primary" htmlType="submit">가입하기</Button>
-      </div>
+      <Loading isLoading={isSigningUp}>
+        <div>
+          <p className="title">회원가입</p>
+          <div className="form-wrapper">
+            <label>아이디</label>
+            <Input name="user-id" value={userId} required onChange={onChangeUserId} />
+          </div>
+          <div className="form-wrapper">
+            <label>닉네임</label>
+            <Input name="user-nick" value={nick} required onChange={onChangeNick} />
+          </div>
+          <div className="form-wrapper">
+            <label>비밀번호</label>
+            <Input name="user-password" type="password" value={password} required onChange={onChangePassword} />
+          </div>
+          <div className="form-wrapper">
+            <label>비밀번호체크</label>
+            <Input
+              name="user-password-check"
+              type="password"
+              value={passwordCheck}
+              required
+              onChange={onChangePasswordCheck}
+            />
+            {passwordError && <div className="error">비밀번호가 일치하지 않습니다.</div>}
+          </div>
+          <div className="term">
+            <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>react-bird의 이용약관에 동의합니다.</Checkbox>
+            {termError && <div className="error">약관에 동의하셔야 합니다.</div>}
+          </div>
+          <div className="button-wrapper">
+            <Button type="primary" htmlType="submit">가입하기</Button>
+          </div>
+        </div>
+      </Loading>
     </Wrapper>
   );
 };

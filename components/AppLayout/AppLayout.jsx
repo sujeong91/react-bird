@@ -1,13 +1,16 @@
 // base
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 // screen
 import { Row, Col } from 'antd';
 import { Nav, UserProfile, LoginForm } from '../index';
+
+// data
+import { loadUserRequestAction } from '../../reducers/user';
 
 // NOTE: Row에 gutter를 하면 브라우저에 가로 스크롤이 생겨 각 col에 padding으로 설정.
 const LeftCol = styled(Col)`
@@ -22,6 +25,13 @@ const RightCol = styled(Col)`
 
 const AppLayout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!me) {
+      dispatch(loadUserRequestAction());
+    }
+  }, []);
 
   return (
     <div className="AppLayout">
